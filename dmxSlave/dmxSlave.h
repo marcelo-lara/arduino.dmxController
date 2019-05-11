@@ -1,0 +1,1 @@
+#define DMX_SLAVE_MOD
