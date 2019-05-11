@@ -3,6 +3,7 @@
         {
             "name": "Win32",
             "includePath": [
+                "${workspaceFolder}/**",
                 "C:\\\\Program Files (x86)\\\\Arduino\\\\tools\\\\**",
                 "C:\\\\Program Files (x86)\\\\Arduino\\\\hardware\\\\arduino\\\\avr\\\\**",
                 "C:\\\\Dropbox\\\\11-Electronics\\\\arduino.dmxController\\\\libs\\\\**"

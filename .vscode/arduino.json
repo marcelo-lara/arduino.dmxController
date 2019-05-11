@@ -2,5 +2,6 @@
     "port": "COM3",
     "board": "arduino:avr:uno",
     "programmer": "AVRISP mkII",
-    "sketch": "dmxSlave\\dmxSlave.ino"
+    "sketch": "dmxSlave\\dmxSlave.ino",
+    "output": "bin"
 }
