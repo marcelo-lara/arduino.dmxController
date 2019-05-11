@@ -23,6 +23,7 @@ RF24 radio(rf_ce, rf_csn);
 
 void setup() { 
     Serial.begin(250000);
+    Dmx.setup();
 
 }
 void loop() {
