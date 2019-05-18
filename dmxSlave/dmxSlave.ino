@@ -5,8 +5,6 @@
 
 //rf module
 #include <RF24.h>
-#define rf_ce     9
-#define rf_csn    8
 RF24 radio(rf_ce, rf_csn);
 
 //relays
@@ -23,7 +21,7 @@ RF24 radio(rf_ce, rf_csn);
 
 void setup() { 
     Serial.begin(250000);
-    Dmx.setup();
+    Dmx.setup(radio);
 
 }
 void loop() {

@@ -6,7 +6,14 @@
                 "${workspaceFolder}/**",
                 "C:\\\\Program Files (x86)\\\\Arduino\\\\tools\\\\**",
                 "C:\\\\Program Files (x86)\\\\Arduino\\\\hardware\\\\arduino\\\\avr\\\\**",
-                "C:\\\\Dropbox\\\\11-Electronics\\\\arduino.dmxController\\\\libs\\\\**"
+                "C:\\\\Users\\\\DarkAngel\\\\Documents\\\\Arduino\\\\libraries\\\\**",
+                "lib\\**"
+            ],
+            "defines": [
+                "ARDUINO",
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
             ],
             "forcedInclude": [
                 "C:\\\\Program Files (x86)\\\\Arduino\\\\hardware\\\\arduino\\\\avr\\\\cores\\\\arduino\\\\Arduino.h"
