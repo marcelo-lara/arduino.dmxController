@@ -3,5 +3,5 @@
     "board": "arduino:avr:uno",
     "programmer": "AVRISP mkII",
     "sketch": "dmxSlave\\dmxSlave.ino",
-    "output": "bin"
+    "output": ".vscode\\bin"
 }
