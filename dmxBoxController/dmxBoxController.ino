@@ -11,20 +11,34 @@ void setup(){
 }
 
 void loop(){
-    if(joystick.update()){
-        moveHead();
-    }
+    if(joystick.update(false)) moveHead();
+    delay(10);
 }
-
 
 void moveHead(){
+    //ignore center
+    if( joystick.position.x<10 && joystick.position.x>-10 &&
+        joystick.position.y<10 && joystick.position.y>-10) return;
+
+    //calc
+    long newX=fxHead.X+((long)joystick.position.x/8L);
+    long newY=fxHead.Y+((long)joystick.position.y/8L);
+
+    //fix boundaries
+    if(newX<0) newX=0;
+    if(newY<0) newY=0;
+    if(newX>0xFFFF) newX=0xFFFF;
+    if(newY>0xFFFF) newY=0xFFFF;
+
+    //send only on move
+    if(newX==fxHead.X && newY==fxHead.Y) return;
 
     //move
-    fxHead.X = fxHead.X + (joystick.position.x/8);
-    fxHead.Y = fxHead.Y + (joystick.position.y/8);
-
-    printFxHead();
+    fxHead.X = newX;
+    fxHead.Y = newY;
 }
+
+
 
 int lastPos;
 void printDigitalJoy(){
@@ -47,12 +61,25 @@ void printDigitalJoy(){
     }
 }
 
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// debug
+void printJoystick(){
+    Serial.print("joy ");
+    Serial.print(joystick.position.x);
+    Serial.print("x\t");
+    Serial.print(joystick.position.y);
+    Serial.print("y |\t");
+
+}
+
 void printFxHead(){
     Serial.print("fxHead ch");
     Serial.print(fxHead.dmxCh);
     Serial.print("\t");
-    Serial.print(fxHead.X);
+    Serial.print(fxHead.X,HEX);
     Serial.print("x\t");
-    Serial.print(fxHead.Y);
+    Serial.print(fxHead.Y,HEX);
     Serial.println("y");
 }
