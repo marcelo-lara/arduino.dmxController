@@ -1,6 +1,8 @@
+#pragma once
 /////////////////////////////////////
 // Dragon DMX control library
 #include <RF24.h>
+#include "rfDmxPacket.h"
 
 #ifndef dragonDmxControl_h
 #define dragonDmxControl_h
@@ -8,13 +10,12 @@
 class dragonDmxControl
 {
   public:
-    dragonDmxControl();
-    void    setup(RF24 &_radio);
-
+    dragonDmxControl(RF24 &_radio);
+    void  setup();
+    void  rfSend(RfDmxPacket *dmxPacket);
+  	bool  radio_status;
 
   private:
+  	RF24* radio;
 };
-
-extern dragonDmxControl Dmx;
-
 #endif

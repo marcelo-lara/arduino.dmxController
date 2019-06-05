@@ -1,13 +1,34 @@
 #include "dmxBoxController.h"
 #include <fixture.Head.h>
+#include <rfDmxPacket.h>
+
 //joystick controller
 #include <Joystick.h>
 Joystick joystick;
 FxHead fxHead;
 
+//rf controller
+#include <RF24.h>
+#define rfCE				9 //RF pin 3 (CE)
+#define rfCS				8//RF pin 4 (CS)
+RF24 radio(rfCE, rfCS);
+
+//display
+#include <SPI.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_PCD8544.h>
+
+#define display_leftVal 28
+Adafruit_PCD8544 display = Adafruit_PCD8544(7, 6, 5, 4, 3);
+
+//dmxBox
+#include<dragonDmxControl.h>
+dragonDmxControl dmx(radio);
+RfDmxPacket packet;
+
 void setup(){
-    Serial.begin(115200);
     joystick.calibrate();
+    dmx.setup();
 }
 
 void loop(){
@@ -36,6 +57,10 @@ void moveHead(){
     //move
     fxHead.X = newX;
     fxHead.Y = newY;
+
+    //deliver package
+    packet.command=RfDmxPacket_render;
+    dmx.rfSend(&packet);
 }
 
 
@@ -59,27 +84,4 @@ void printDigitalJoy(){
         case joystick_pos_downright: Serial.println("joystick_pos_downright"); break;
         default: Serial.println("joystick_pos unknown!!");break;
     }
-}
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// debug
-void printJoystick(){
-    Serial.print("joy ");
-    Serial.print(joystick.position.x);
-    Serial.print("x\t");
-    Serial.print(joystick.position.y);
-    Serial.print("y |\t");
-
-}
-
-void printFxHead(){
-    Serial.print("fxHead ch");
-    Serial.print(fxHead.dmxCh);
-    Serial.print("\t");
-    Serial.print(fxHead.X,HEX);
-    Serial.print("x\t");
-    Serial.print(fxHead.Y,HEX);
-    Serial.println("y");
 }
